@@ -11,10 +11,10 @@ import com.the_mgi.wildapricot_wrapper.exception.HttpException;
 import java.util.Arrays;
 import java.util.List;
 
-public class SavedSearchServiceService {
+public class SavedSearchService {
     private final ApplicationService applicationService;
 
-    public SavedSearchServiceService(WildApricot wildApricot) {
+    public SavedSearchService(WildApricot wildApricot) {
         this.applicationService = ApplicationService.getInstance(wildApricot);
     }
 
