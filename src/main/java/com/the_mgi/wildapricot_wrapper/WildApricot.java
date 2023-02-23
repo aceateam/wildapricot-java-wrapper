@@ -1,5 +1,6 @@
 package com.the_mgi.wildapricot_wrapper;
 
+import com.the_mgi.wildapricot_wrapper.account.AccountService;
 import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
 import com.the_mgi.wildapricot_wrapper.contact.ContactService;
 import com.the_mgi.wildapricot_wrapper.contact.saved_search.SavedSearchService;
@@ -14,6 +15,7 @@ public class WildApricot {
     private String password;
     private final AuthenticationOption authOption;
 
+    private AccountService accountService;
     private ContactService contactService;
     private SavedSearchService contactSavedSearch;
 
@@ -29,6 +31,7 @@ public class WildApricot {
     private void init() {
         contactService = new ContactService(this);
         contactSavedSearch = new SavedSearchService(this);
+        accountService = new AccountService(this);
     }
 
     public WildApricot clientId(String clientId) {
