@@ -8,6 +8,7 @@
   <artifactId>wildapricot-wrapper</artifactId>
   <version>0.1</version>
   <packaging>jar</packaging>
+  <description>A java wrapper for WildApricot API</description>
 
   <licenses>
     <license>
