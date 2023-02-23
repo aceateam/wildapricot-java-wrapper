@@ -1,9 +1,9 @@
 package com.the_mgi.wildapricot_wrapper.exception;
 
 public class InvalidEnumValueException extends RuntimeException {
-    private final Class aClass;
+    private final Class<?> aClass;
 
-    public InvalidEnumValueException(String message, Class aClass) {
+    public InvalidEnumValueException(String message, Class<?> aClass) {
         super(message);
         this.aClass = aClass;
     }

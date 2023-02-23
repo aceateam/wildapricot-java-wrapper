@@ -1,13 +1,23 @@
 package com.the_mgi.wildapricot_wrapper.contact;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.the_mgi.wildapricot_wrapper.ApplicationService;
 import com.the_mgi.wildapricot_wrapper.WildApricot;
+import com.the_mgi.wildapricot_wrapper.base.annotation.FieldValue;
 import com.the_mgi.wildapricot_wrapper.base.model.Pair;
+import com.the_mgi.wildapricot_wrapper.base.util.ObjectMapperSingleton;
 import com.the_mgi.wildapricot_wrapper.contact.model.ContactExtendedMembershipInfo;
+import com.the_mgi.wildapricot_wrapper.contact.model.ContactFieldValue;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
+import org.apache.commons.lang3.StringUtils;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ContactService {
     private final ApplicationService applicationService;
@@ -51,5 +61,41 @@ public class ContactService {
         Integer contactId
     ) throws HttpException {
         return this.getInformationAboutContact(accountId, contactId, false);
+    }
+
+    public <T> T getInformationAboutContactParsed(
+        Integer accountId,
+        Integer contactId,
+        Boolean isExtendedMembershipInfo,
+        Class<T> aClass
+    ) throws HttpException, IOException, IllegalAccessException {
+        ContactExtendedMembershipInfo info = this.getInformationAboutContact(accountId, contactId, isExtendedMembershipInfo);
+        ObjectMapper mapper = ObjectMapperSingleton.getObjectMapper();
+        String jsonString = mapper.writeValueAsString(info);
+        final Map<String, ContactFieldValue> map = new HashMap<>();
+        info.getContactFieldValues().forEach(it -> map.put(it.getFieldName(), it));
+        T finalObjectToReturn = mapper.readValue(jsonString, aClass);
+        Field[] fields = aClass.getDeclaredFields();
+        for (Field field : fields) {
+            field.setAccessible(true);
+            FieldValue fieldValue = field.getAnnotation(FieldValue.class);
+            if (fieldValue != null && map.containsKey(fieldValue.key())) {
+                String mainKey = fieldValue.key();
+                String nestedKey = fieldValue.nestedValueKey();
+                Object value = map.get(mainKey).getValue();
+
+                if (StringUtils.isNotBlank(nestedKey)) {
+                    JsonNode node = mapper.readTree(mapper.writeValueAsString(value));
+                    JsonNode nodeValue = node.get(nestedKey);
+                    if (nodeValue != null) {
+                        field.set(finalObjectToReturn, nodeValue.textValue());
+                    }
+                } else {
+                    field.set(finalObjectToReturn, mapper.readValue(mapper.writeValueAsString(value), field.getType()));
+                }
+            }
+        }
+
+        return finalObjectToReturn;
     }
 }

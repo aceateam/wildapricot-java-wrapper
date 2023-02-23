@@ -5,12 +5,12 @@ import com.the_mgi.wildapricot_wrapper.base.model.AuthResponse;
 import com.the_mgi.wildapricot_wrapper.base.model.ErrorObject;
 import com.the_mgi.wildapricot_wrapper.base.model.Pair;
 import com.the_mgi.wildapricot_wrapper.base.util.AppConstants;
+import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
 import com.the_mgi.wildapricot_wrapper.base.util.ObjectMapperSingleton;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
 import okhttp3.*;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.IOException;

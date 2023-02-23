@@ -1,9 +1,9 @@
 package com.the_mgi.wildapricot_wrapper;
 
-import com.the_mgi.wildapricot_wrapper.contact.ContactService;
-import lombok.Getter;
 import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
+import com.the_mgi.wildapricot_wrapper.contact.ContactService;
 import com.the_mgi.wildapricot_wrapper.contact.saved_search.SavedSearchService;
+import lombok.Getter;
 
 @Getter
 public class WildApricot {

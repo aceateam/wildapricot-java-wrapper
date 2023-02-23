@@ -10,6 +10,7 @@ import lombok.Getter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -103,4 +104,114 @@ public class ContactExtendedMembershipInfo {
     @JsonProperty("FieldValues")
     private List<ContactFieldValue> contactFieldValues;
 
+    public ContactExtendedMembershipInfo setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setOrganization(String organization) {
+        this.organization = organization;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setDisplayName(String displayName) {
+        this.displayName = displayName;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setProfileLastUpdated(Date profileLastUpdated) {
+        this.profileLastUpdated = profileLastUpdated;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setMembershipLevel(MembershipLevel membershipLevel) {
+        this.membershipLevel = membershipLevel;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setMembershipEnabled(Boolean membershipEnabled) {
+        isMembershipEnabled = membershipEnabled;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setStatus(Status status) {
+        this.status = status;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setExtendedMembershipInfo(ExtendedMembershipInfo extendedMembershipInfo) {
+        this.extendedMembershipInfo = extendedMembershipInfo;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setAccountAdministrator(Boolean accountAdministrator) {
+        isAccountAdministrator = accountAdministrator;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setTermsOfUseAccepted(Boolean termsOfUseAccepted) {
+        this.termsOfUseAccepted = termsOfUseAccepted;
+        return this;
+    }
+
+    public ContactExtendedMembershipInfo setContactFieldValues(List<ContactFieldValue> contactFieldValues) {
+        this.contactFieldValues = contactFieldValues;
+        return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ContactExtendedMembershipInfo that = (ContactExtendedMembershipInfo) o;
+
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "ContactExtendedMembershipInfo{" +
+               "id='" + id + '\'' +
+               ", url='" + url + '\'' +
+               ", firstName='" + firstName + '\'' +
+               ", lastName='" + lastName + '\'' +
+               ", organization='" + organization + '\'' +
+               ", emailAddress='" + emailAddress + '\'' +
+               ", displayName='" + displayName + '\'' +
+               ", profileLastUpdated=" + profileLastUpdated +
+               ", membershipLevel=" + membershipLevel +
+               ", isMembershipEnabled=" + isMembershipEnabled +
+               ", status=" + status +
+               ", extendedMembershipInfo=" + extendedMembershipInfo +
+               ", isAccountAdministrator=" + isAccountAdministrator +
+               ", termsOfUseAccepted=" + termsOfUseAccepted +
+               ", contactFieldValues=" + contactFieldValues +
+               '}';
+    }
 }
