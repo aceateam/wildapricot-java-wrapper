@@ -19,7 +19,16 @@ Right now, the only mode of authentication, i.e API KEY authentication is availa
 
 ### Usage
 
-1. For Account's service
+1. Getting Started
+```
+<dependency>
+   <groupId>com.the-mgi</groupId>
+   <artifactId>wildapricot-wrapper</artifactId>
+   <version>0.1</version>
+</dependency>
+```
+
+2. For Account's service
 ```
    WildApricot wildApricot = new WildApricot.Builder()
             .authOption(AuthenticationOption.USING_API_KEY)
@@ -35,7 +44,7 @@ Right now, the only mode of authentication, i.e API KEY authentication is availa
             .getAccountDetails(xxxxxxx);
 ```
 
-2. For Contact's Service
+3. For Contact's Service
     <p>As we're aware that WildApricot keep fields of a contact in the form of an array, so to efficiently tackle that you can use the custom annotations provided by this package i.e @FieldValue, @JsonSerializable, and then you can use that in the following way, with the class models.</p>
 the properties annotated w/ @JsonProperty are directly being de-serialized from JSON object, whereas the ones with @FieldValue are being found out from the list of FieldValues and are then being assigned.
 ```
