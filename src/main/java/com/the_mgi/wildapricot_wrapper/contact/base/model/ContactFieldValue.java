@@ -1,8 +1,8 @@
-package com.the_mgi.wildapricot_wrapper.contact.model;
+package com.the_mgi.wildapricot_wrapper.contact.base.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.the_mgi.wildapricot_wrapper.contact.model.enums.CustomAccessLevel;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.CustomAccessLevel;
 import lombok.Getter;
 
 import java.util.Objects;

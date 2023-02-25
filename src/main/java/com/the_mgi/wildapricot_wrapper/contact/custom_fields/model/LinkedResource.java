@@ -1,5 +1,4 @@
-package com.the_mgi.wildapricot_wrapper.contact.model;
-
+package com.the_mgi.wildapricot_wrapper.contact.custom_fields.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,7 +8,7 @@ import java.util.Objects;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PendingMembershipInvoice {
+public class LinkedResource {
     /**
      * Unique search identifier
      */
@@ -22,12 +21,12 @@ public class PendingMembershipInvoice {
     @JsonProperty("Url")
     private String url;
 
-    public PendingMembershipInvoice setId(String id) {
+    public LinkedResource setId(String id) {
         this.id = id;
         return this;
     }
 
-    public PendingMembershipInvoice setUrl(String url) {
+    public LinkedResource setUrl(String url) {
         this.url = url;
         return this;
     }
@@ -37,7 +36,7 @@ public class PendingMembershipInvoice {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        PendingMembershipInvoice that = (PendingMembershipInvoice) o;
+        LinkedResource that = (LinkedResource) o;
 
         return Objects.equals(id, that.id);
     }
@@ -49,7 +48,7 @@ public class PendingMembershipInvoice {
 
     @Override
     public String toString() {
-        return "PendingMembershipInvoice{" +
+        return "LinkedResource{" +
                "id='" + id + '\'' +
                ", url='" + url + '\'' +
                '}';

@@ -1,4 +1,5 @@
-package com.the_mgi.wildapricot_wrapper.contact.model;
+package com.the_mgi.wildapricot_wrapper.contact.base.model;
+
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +9,7 @@ import java.util.Objects;
 
 @Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MembershipLevel {
+public class PendingMembershipInvoice {
     /**
      * Unique search identifier
      */
@@ -21,24 +22,13 @@ public class MembershipLevel {
     @JsonProperty("Url")
     private String url;
 
-    /**
-     * Resource name
-     */
-    @JsonProperty("Name")
-    private String name;
-
-    public MembershipLevel setId(String id) {
+    public PendingMembershipInvoice setId(String id) {
         this.id = id;
         return this;
     }
 
-    public MembershipLevel setUrl(String url) {
+    public PendingMembershipInvoice setUrl(String url) {
         this.url = url;
-        return this;
-    }
-
-    public MembershipLevel setName(String name) {
-        this.name = name;
         return this;
     }
 
@@ -47,7 +37,7 @@ public class MembershipLevel {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        MembershipLevel that = (MembershipLevel) o;
+        PendingMembershipInvoice that = (PendingMembershipInvoice) o;
 
         return Objects.equals(id, that.id);
     }
@@ -59,10 +49,9 @@ public class MembershipLevel {
 
     @Override
     public String toString() {
-        return "MembershipLevel{" +
+        return "PendingMembershipInvoice{" +
                "id='" + id + '\'' +
                ", url='" + url + '\'' +
-               ", name='" + name + '\'' +
                '}';
     }
 }

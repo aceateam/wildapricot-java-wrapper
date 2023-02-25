@@ -1,7 +1,7 @@
-package com.the_mgi.wildapricot_wrapper.contact.converters;
+package com.the_mgi.wildapricot_wrapper.contact.base.converters;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import com.the_mgi.wildapricot_wrapper.contact.model.enums.Status;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.Status;
 
 public class StatusConverter extends StdConverter<String, Status> {
     @Override

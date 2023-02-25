@@ -1,7 +1,7 @@
-package com.the_mgi.wildapricot_wrapper.contact.converters;
+package com.the_mgi.wildapricot_wrapper.contact.base.converters;
 
 import com.fasterxml.jackson.databind.util.StdConverter;
-import com.the_mgi.wildapricot_wrapper.contact.model.enums.PendingMembershipOrderStatusType;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.PendingMembershipOrderStatusType;
 
 public class PendingMembershipOrderStatusTypeConverter extends StdConverter<String, PendingMembershipOrderStatusType> {
     @Override

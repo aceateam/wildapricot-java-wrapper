@@ -2,7 +2,8 @@ package com.the_mgi.wildapricot_wrapper;
 
 import com.the_mgi.wildapricot_wrapper.account.AccountService;
 import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
-import com.the_mgi.wildapricot_wrapper.contact.ContactService;
+import com.the_mgi.wildapricot_wrapper.contact.base.ContactService;
+import com.the_mgi.wildapricot_wrapper.contact.custom_fields.CustomFieldService;
 import com.the_mgi.wildapricot_wrapper.contact.saved_search.SavedSearchService;
 import lombok.Getter;
 
@@ -17,6 +18,7 @@ public class WildApricot {
 
     private AccountService accountService;
     private ContactService contactService;
+    private CustomFieldService customFieldService;
     private SavedSearchService contactSavedSearch;
 
     private WildApricot(
@@ -32,6 +34,7 @@ public class WildApricot {
         contactService = new ContactService(this);
         contactSavedSearch = new SavedSearchService(this);
         accountService = new AccountService(this);
+        customFieldService = new CustomFieldService(this);
     }
 
     public WildApricot clientId(String clientId) {

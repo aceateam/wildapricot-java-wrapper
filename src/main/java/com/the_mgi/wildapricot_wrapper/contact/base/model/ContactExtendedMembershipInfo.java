@@ -1,11 +1,11 @@
-package com.the_mgi.wildapricot_wrapper.contact.model;
+package com.the_mgi.wildapricot_wrapper.contact.base.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.the_mgi.wildapricot_wrapper.contact.converters.DateConverter;
-import com.the_mgi.wildapricot_wrapper.contact.converters.StatusConverter;
-import com.the_mgi.wildapricot_wrapper.contact.model.enums.Status;
+import com.the_mgi.wildapricot_wrapper.contact.base.converters.DateConverter;
+import com.the_mgi.wildapricot_wrapper.contact.base.converters.StatusConverter;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.Status;
 import lombok.Getter;
 
 import java.util.Date;

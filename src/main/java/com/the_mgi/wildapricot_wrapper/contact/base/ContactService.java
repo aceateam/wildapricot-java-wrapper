@@ -1,4 +1,4 @@
-package com.the_mgi.wildapricot_wrapper.contact;
+package com.the_mgi.wildapricot_wrapper.contact.base;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -8,8 +8,8 @@ import com.the_mgi.wildapricot_wrapper.WildApricot;
 import com.the_mgi.wildapricot_wrapper.base.annotation.FieldValue;
 import com.the_mgi.wildapricot_wrapper.base.model.Pair;
 import com.the_mgi.wildapricot_wrapper.base.util.ObjectMapperSingleton;
-import com.the_mgi.wildapricot_wrapper.contact.model.ContactExtendedMembershipInfo;
-import com.the_mgi.wildapricot_wrapper.contact.model.ContactFieldValue;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactExtendedMembershipInfo;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactFieldValue;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
 import org.apache.commons.lang3.StringUtils;
 

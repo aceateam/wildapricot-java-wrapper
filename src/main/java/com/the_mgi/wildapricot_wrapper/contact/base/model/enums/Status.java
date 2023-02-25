@@ -1,4 +1,4 @@
-package com.the_mgi.wildapricot_wrapper.contact.model.enums;
+package com.the_mgi.wildapricot_wrapper.contact.base.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
