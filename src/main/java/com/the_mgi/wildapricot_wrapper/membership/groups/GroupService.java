@@ -44,7 +44,7 @@ public class GroupService {
      * @throws HttpException provides exception descriptions
      *                       <ul>
      *                          <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
-     *                          <li>Requested item not found.</li>
+     *                          <li>404 Requested item not found.</li>
      *                          <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
      *                       </ul>
      */
