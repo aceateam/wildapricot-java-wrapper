@@ -2,8 +2,6 @@ package com.the_mgi.wildapricot_wrapper.contact.base.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.the_mgi.wildapricot_wrapper.contact.base.converters.PendingMembershipOrderStatusTypeConverter;
 import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.PendingMembershipOrderStatusType;
 import lombok.Getter;
 
@@ -13,7 +11,6 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ExtendedMembershipInfo {
     @JsonProperty("PendingMembershipOrderStatusType")
-    @JsonDeserialize(converter = PendingMembershipOrderStatusTypeConverter.class)
     private PendingMembershipOrderStatusType type;
 
     /**

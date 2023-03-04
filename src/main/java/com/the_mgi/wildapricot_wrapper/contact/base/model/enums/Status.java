@@ -1,10 +1,9 @@
 package com.the_mgi.wildapricot_wrapper.contact.base.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-import com.the_mgi.wildapricot_wrapper.exception.InvalidEnumValueException;
+import com.the_mgi.wildapricot_wrapper.base.GenericEnum;
 
-public enum Status {
+public enum Status implements GenericEnum<Status, String> {
     ACTIVE("Active"),
     LAPSED("Lapsed"),
     PENDING_NEW("PendingNew"),
@@ -17,23 +16,13 @@ public enum Status {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
         return value;
     }
 
-    public static Status getEnumTypeFromString(String value) {
-        for (Status status: Status.values()) {
-            if (status.getValue().equals(value)) {
-                return status;
-            }
-        }
-        throw new InvalidEnumValueException("Invalid Enum value provided", Status.class);
-    }
-
     @JsonCreator
     public static Status create(String value) {
-        return getEnumTypeFromString(value);
+        return GenericEnum.getEnumTypeFromString(Status.class, value);
     }
 
     @Override

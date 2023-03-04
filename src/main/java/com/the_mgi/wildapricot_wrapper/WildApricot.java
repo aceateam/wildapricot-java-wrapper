@@ -9,6 +9,7 @@ import com.the_mgi.wildapricot_wrapper.membership.bundles.BundlesService;
 import com.the_mgi.wildapricot_wrapper.membership.groups.GroupService;
 import com.the_mgi.wildapricot_wrapper.membership.levels.LevelsService;
 import lombok.Getter;
+import org.apache.commons.lang3.StringUtils;
 
 @Getter
 public class WildApricot {
@@ -36,6 +37,15 @@ public class WildApricot {
         init();
     }
 
+    private WildApricot(String clientId, String clientSecret, String username, String password, AuthenticationOption authOption) {
+        this.clientId = clientId;
+        this.clientSecret = clientSecret;
+        this.username = username;
+        this.password = password;
+        this.authOption = authOption;
+        init();
+    }
+
     private void init() {
         contactService = new ContactService(this);
         contactSavedSearch = new SavedSearchService(this);
@@ -46,26 +56,11 @@ public class WildApricot {
         groupService = new GroupService(this);
     }
 
-    public WildApricot clientId(String clientId) {
-        this.clientId = clientId;
-        return this;
-    }
-
-    public WildApricot clientSecret(String clientSecret) {
-        this.clientSecret = clientSecret;
-        return this;
-    }
-
-    public WildApricot apiKey(String apiKey) {
-        this.apiKey = apiKey;
-        return this;
-    }
-
     @Override
     public String toString() {
         return "WildApricotService{" +
-            ", authOption=" + authOption +
-            '}';
+               ", authOption=" + authOption +
+               '}';
     }
 
     public static class Builder {
@@ -73,6 +68,8 @@ public class WildApricot {
         private String clientSecret;
         private String apiKey;
         private AuthenticationOption authOption;
+        private String username;
+        private String password;
 
         public Builder clientId(String clientId) {
             this.clientId = clientId;
@@ -94,14 +91,41 @@ public class WildApricot {
             return this;
         }
 
+        public Builder username(String username) {
+            this.username = username;
+            return this;
+        }
+
+        public Builder password(String password) {
+            this.password = password;
+            return this;
+        }
+
         public WildApricot build() {
             if (this.authOption == null) throw new NullPointerException("AuthOption parameter cannot be null");
             return switch (this.authOption) {
                 case USING_API_KEY -> {
-                    if (this.apiKey == null) throw new NullPointerException("ApiKey cannot be null");
+                    if (StringUtils.isBlank(this.apiKey)) throw new NullPointerException("ApiKey cannot be null");
                     yield new WildApricot(
                         AuthenticationOption.USING_API_KEY,
                         this.apiKey
+                    );
+                }
+                case USING_LOGIN_PASSWORD -> {
+                    if (
+                        StringUtils.isBlank(this.username) ||
+                        StringUtils.isBlank((this.password)) ||
+                        StringUtils.isBlank(this.clientId) ||
+                        StringUtils.isBlank(this.clientSecret)
+                    ) {
+                        throw new NullPointerException("for using client credentials as your authorization type, you need to provide all attributes: clientId, clientSecret, username, password");
+                    }
+                    yield new WildApricot(
+                        this.clientId,
+                        this.clientSecret,
+                        this.username,
+                        this.password,
+                        AuthenticationOption.USING_LOGIN_PASSWORD
                     );
                 }
                 default -> null;

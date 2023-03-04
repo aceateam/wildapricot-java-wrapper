@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.the_mgi.wildapricot_wrapper.contact.base.converters.DateConverter;
-import com.the_mgi.wildapricot_wrapper.contact.base.converters.StatusConverter;
 import com.the_mgi.wildapricot_wrapper.contact.base.model.enums.Status;
 import lombok.Getter;
 
@@ -80,7 +79,6 @@ public class ContactExtendedMembershipInfo {
      * The status of the contact's membership. The status is only included in the results if the contact is a member.
      */
     @JsonProperty("Status")
-    @JsonDeserialize(converter = StatusConverter.class)
     private Status status;
 
     @JsonProperty("ExtendedMembershipInfo")

@@ -23,7 +23,7 @@ public final class ApplicationService {
     private static final OkHttpClient client = new OkHttpClient();
     private final AuthResponse authResponse;
 
-    public ApplicationService(AuthResponse authResponse) {
+    private ApplicationService(AuthResponse authResponse) {
         this.authResponse = authResponse;
     }
 
@@ -68,7 +68,7 @@ public final class ApplicationService {
         List<Pair<String, String>> queryParams,
         String authorizationBearer
     ) throws HttpException {
-       return this.execute(new Request.Builder(), url, type, queryParams, authorizationBearer);
+        return this.execute(new Request.Builder(), url, type, queryParams, authorizationBearer);
     }
 
     public <T> T execute(
@@ -107,7 +107,7 @@ public final class ApplicationService {
         requestBuilder
             .url(httpUrl)
             .addHeader("Content-Type", "application/json")
-            .addHeader("Authorization", "Bearer " + (authorizationBearer != null ?  authorizationBearer : this.authResponse.getAccessToken()))
+            .addHeader("Authorization", "Bearer " + (authorizationBearer != null ? authorizationBearer : this.authResponse.getAccessToken()))
             .addHeader("Accept", "application/json");
     }
 
@@ -132,17 +132,44 @@ public final class ApplicationService {
                     .build();
 
 
-                try {
-                    Response response = client.newCall(request).execute();
-                    if (response.isSuccessful()) {
-                        if (response.body() == null) throw new IllegalStateException("AuthResponseBody cannot be null");
-                        applicationService = new ApplicationService(ObjectMapperSingleton.getObjectMapper().readValue(response.body().string(), AuthResponse.class));
-                    }
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                }
+                applicationService = getApplicationServiceInstance(request);
+            } else if (wildApricot.getAuthOption().equals(AuthenticationOption.USING_LOGIN_PASSWORD)) {
+                String clientIdAndSecret = wildApricot.getClientId() + ":" + wildApricot.getClientSecret();
+                String authorizationHeader = "Basic " + DatatypeConverter.printBase64Binary(clientIdAndSecret.getBytes(StandardCharsets.UTF_8));
+
+                FormBody formBody = new FormBody.Builder()
+                    .add("grant_type", "password")
+                    .add("username", wildApricot.getUsername())
+                    .add("password", wildApricot.getPassword())
+                    .add("scope", "auto")
+                    .build();
+
+                Request request = new Request.Builder()
+                    .url(AppConstants.WA_TOKEN_URL)
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("Authorization", authorizationHeader)
+                    .addHeader("Accept", "application/json")
+                    .post(formBody)
+                    .build();
+
+                applicationService = getApplicationServiceInstance(request);
+
             } else throw new RuntimeException("Authentication is only supported with ApiKey yet!");
         }
         return applicationService;
+    }
+
+    private static ApplicationService getApplicationServiceInstance(Request request) {
+        try {
+            Response response = client.newCall(request).execute();
+            assert response.body() != null;
+            String stringResponse = response.body().string();
+            if (response.isSuccessful()) {
+                return new ApplicationService(ObjectMapperSingleton.getObjectMapper().readValue(stringResponse, AuthResponse.class));
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        throw new RuntimeException("Invalid Exception occurred!");
     }
 }

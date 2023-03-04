@@ -1,10 +1,10 @@
 package com.the_mgi.wildapricot_wrapper.contact.base.model.enums;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import com.the_mgi.wildapricot_wrapper.base.GenericEnum;
 import com.the_mgi.wildapricot_wrapper.exception.InvalidEnumValueException;
 
-public enum PendingMembershipOrderStatusType {
+public enum PendingMembershipOrderStatusType implements GenericEnum<PendingMembershipOrderStatusType, String> {
     INVISIBLE("Invisible"),
     PENDING_NO_CORRESPONDING_INVOICE("PendingNoCorrespondingInvoice"),
     PENDING_NOT_PAID_YET("PendingNotPaidYet"),
@@ -20,9 +20,8 @@ public enum PendingMembershipOrderStatusType {
         this.value = value;
     }
 
-    @JsonValue
     public String getValue() {
-        return value;
+        return this.value;
     }
 
     public static PendingMembershipOrderStatusType getEnumTypeFromString(String value) {
