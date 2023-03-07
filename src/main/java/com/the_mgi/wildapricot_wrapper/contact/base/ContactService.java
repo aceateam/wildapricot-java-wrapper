@@ -196,4 +196,21 @@ public class ContactService {
             )
         );
     }
+
+    public ContactsResponse getContactList(
+        Integer accountId
+    ) throws HttpException {
+        return this.getContactList(accountId,
+            false,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
+        );
+    }
 }
