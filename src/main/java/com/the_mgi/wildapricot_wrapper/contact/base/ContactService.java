@@ -299,4 +299,33 @@ public class ContactService {
             null
         );
     }
+
+    /**
+     * Delete an archived contact
+     * <br />
+     * Notes: while doing testing, observed that it returns 400 statusCode, with error Invalid argument value id='xxxxx', but as seen on the Wildapricot UI, member has been deleted.
+     *
+     * @param accountId Your account identifier
+     * @param contactId Unique contact identifier
+     * @return OK
+     * @throws HttpException provides exception descriptions
+     *                       <ul>
+     *                          <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
+     *                           <li>404 Requested item not found.</li>
+     *                          <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
+     *                       </ul>
+     */
+    public Object deleteContact(
+        Integer accountId,
+        Integer contactId
+    ) throws HttpException {
+        return this.applicationService.execute(
+            new Request.Builder().delete(),
+            "accounts/" + accountId + "/contacts/" + contactId,
+            new TypeReference<>() {
+            },
+            null,
+            null
+        );
+    }
 }
