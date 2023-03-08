@@ -1,5 +1,6 @@
 package com.the_mgi.wildapricot_wrapper.contact.base;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -8,21 +9,22 @@ import com.the_mgi.wildapricot_wrapper.WildApricot;
 import com.the_mgi.wildapricot_wrapper.base.annotation.FieldValue;
 import com.the_mgi.wildapricot_wrapper.base.model.Pair;
 import com.the_mgi.wildapricot_wrapper.base.util.ObjectMapperSingleton;
-import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactExtendedMembershipInfo;
-import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactFieldValue;
-import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactsMe;
-import com.the_mgi.wildapricot_wrapper.contact.base.model.ContactsResponse;
+import com.the_mgi.wildapricot_wrapper.contact.base.model.*;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
+import okhttp3.MediaType;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.the_mgi.wildapricot_wrapper.base.util.UtilFunctions.convertBooleanToString;
-import static com.the_mgi.wildapricot_wrapper.base.util.UtilFunctions.convertIntegerToString;
+import static com.the_mgi.wildapricot_wrapper.base.util.AppConstants.MEDIA_TYPE_JSON;
+import static com.the_mgi.wildapricot_wrapper.base.util.UtilFunctions.*;
 
 public class ContactService {
     private final ApplicationService applicationService;
@@ -197,6 +199,10 @@ public class ContactService {
         );
     }
 
+    /**
+     * Serving as an overload function, for getContactList
+     * See {@link #getContactList(Integer, Boolean, String, String, String, String, String, Integer, Integer, Boolean, Boolean)}
+     */
     public ContactsResponse getContactList(
         Integer accountId
     ) throws HttpException {
@@ -210,6 +216,53 @@ public class ContactService {
             null,
             null,
             null,
+            null
+        );
+    }
+
+    /**
+     * Create a new contact or member record
+     *
+     * @param accountId Your account identifier
+     * @param contact   required object body
+     *                  <ul>
+     *                    <li>Values for read-only or unrecognized fields will be ignored.</li>
+     *                    <li>
+     *                        In order to assign membership
+     *                        <ul>
+     *                            <li>set MembershipEnabled=true</li>
+     *                            <li>set MembershipLevel.Id to id of desired level</li>
+     *                        </ul>
+     *                    </li>
+     *                    <li>In order to assign bundle membership
+     *                      <ul>
+     *                          <li>set MembershipEnabled=true</li>
+     *                          <li>set MembershipLevel.Id to id of some bundle level</li>
+     *                          <li>set 'Member role' field value to json '{ "Label": "ROLE" }' where ROLE is "Bundle administrator" or "Bundle member"</li>
+     *                          <li>For bundle member set field 'Bundle ID' to value of bundle identifier. The bundle ID is returned by the Bundles API call when using it to retrieve bundle information for a particular membership level.</li>
+     *                      </ul>
+     *                      </li>
+     *                  </ul>
+     * @return Returns created contact record.
+     * @throws HttpException provides exception descriptions
+     *                       <ul>
+     *                          <li>400 On invalid parameters. See error details in response body.</li>
+     *                          <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
+     *                          <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
+     *                       </ul>
+     * @throws JsonProcessingException Invalid json request object provided for {@linkplain CreateContactParams}
+     */
+    public ContactExtendedMembershipInfo postNewContact(
+        Integer accountId,
+        CreateContactParams contact
+    ) throws HttpException, JsonProcessingException {
+        String jsonString = toJsonString(contact);
+        return this.applicationService.execute(
+            new Request.Builder().post(RequestBody.create(jsonString, MEDIA_TYPE_JSON)),
+            "accounts/" + accountId + "/contacts",
+            new TypeReference<>() {
+            },
+            Collections.emptyList(),
             null
         );
     }
