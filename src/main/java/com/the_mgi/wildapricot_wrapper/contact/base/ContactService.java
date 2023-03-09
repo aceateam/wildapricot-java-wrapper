@@ -244,12 +244,12 @@ public class ContactService {
      *                      </li>
      *                  </ul>
      * @return Returns created contact record.
-     * @throws HttpException provides exception descriptions
-     *                       <ul>
-     *                          <li>400 On invalid parameters. See error details in response body.</li>
-     *                          <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
-     *                          <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
-     *                       </ul>
+     * @throws HttpException           provides exception descriptions
+     *                                 <ul>
+     *                                    <li>400 On invalid parameters. See error details in response body.</li>
+     *                                    <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
+     *                                    <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
+     *                                 </ul>
      * @throws JsonProcessingException Invalid json request object provided for {@linkplain CreateContactParams}
      */
     public ContactExtendedMembershipInfo postNewContact(
@@ -262,7 +262,40 @@ public class ContactService {
             "accounts/" + accountId + "/contacts",
             new TypeReference<>() {
             },
-            Collections.emptyList(),
+            null,
+            null
+        );
+    }
+
+    /**
+     * Update information about existing member or contact
+     * <br />
+     * In order to update contact details it is recommended to provide only the custom fields you want to modify. See {@link #postNewContact(Integer, CreateContactParams)} for more details.
+     *
+     * @param accountId Your account identifier
+     * @param contactId Unique contact identifier
+     * @param contact   contact value to update
+     * @return Updated version of contact information.
+     * @throws HttpException           provides exception descriptions
+     *                                 <ul>
+     *                                    <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
+     *                                     <li>404 Requested item not found.</li>
+     *                                    <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
+     *                                 </ul>
+     * @throws JsonProcessingException Invalid json request object provided for {@linkplain UpdateContactParams}
+     */
+    public ContactExtendedMembershipInfo updateExistingContact(
+        Integer accountId,
+        Integer contactId,
+        UpdateContactParams contact
+    ) throws HttpException, JsonProcessingException {
+        String jsonString = toJsonString(contact);
+        return this.applicationService.execute(
+            new Request.Builder().put(RequestBody.create(jsonString, MEDIA_TYPE_JSON)),
+            "accounts/" + accountId + "/contacts/" + contactId,
+            new TypeReference<>() {
+            },
+            null,
             null
         );
     }
