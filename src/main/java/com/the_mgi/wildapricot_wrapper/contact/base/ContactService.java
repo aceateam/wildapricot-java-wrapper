@@ -11,14 +11,12 @@ import com.the_mgi.wildapricot_wrapper.base.model.Pair;
 import com.the_mgi.wildapricot_wrapper.base.util.ObjectMapperSingleton;
 import com.the_mgi.wildapricot_wrapper.contact.base.model.*;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
-import okhttp3.MediaType;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -223,7 +221,7 @@ public class ContactService {
     /**
      * Create a new contact or member record
      *
-     * @param accountId Your account identifier
+     * @param accountId Your account identifier (pathVariable)
      * @param contact   required object body
      *                  <ul>
      *                    <li>Values for read-only or unrecognized fields will be ignored.</li>
@@ -272,9 +270,9 @@ public class ContactService {
      * <br />
      * In order to update contact details it is recommended to provide only the custom fields you want to modify. See {@link #postNewContact(Integer, CreateContactParams)} for more details.
      *
-     * @param accountId Your account identifier
-     * @param contactId Unique contact identifier
-     * @param contact   contact value to update
+     * @param accountId Your account identifier (pathVariable)
+     * @param contactId Unique contact identifier (pathVariable)
+     * @param contact   contact value to update (query)
      * @return Updated version of contact information.
      * @throws HttpException           provides exception descriptions
      *                                 <ul>
@@ -305,8 +303,8 @@ public class ContactService {
      * <br />
      * Notes: while doing testing, observed that it returns 400 statusCode, with error Invalid argument value id='xxxxx', but as seen on the Wildapricot UI, member has been deleted.
      *
-     * @param accountId Your account identifier
-     * @param contactId Unique contact identifier
+     * @param accountId Your account identifier (pathVariable)
+     * @param contactId Unique contact identifier (pathVariable)
      * @return OK
      * @throws HttpException provides exception descriptions
      *                       <ul>
@@ -322,6 +320,27 @@ public class ContactService {
         return this.applicationService.execute(
             new Request.Builder().delete(),
             "accounts/" + accountId + "/contacts/" + contactId,
+            new TypeReference<>() {
+            },
+            null,
+            null
+        );
+    }
+
+    /**
+     * @param accountId Your account identifier (pathVariable)
+     * @throws HttpException provides exception descriptions
+     *                       <ul>
+     *                          <li>401 oAuth token was not provided, invalid or does not provide access to requested URL</li>
+     *                          <li>429 Too many requests from same account. Wait for a minute and try again, however this exception is handled, will automatically wait for 1 minutes, and then do another call.</li>
+     *                       </ul>
+     */
+    public Boolean acceptTermsOfUse(
+        Integer accountId
+    ) throws HttpException {
+        return this.applicationService.execute(
+            new Request.Builder().post(RequestBody.create(null, new byte[0])),
+            "rpc/" + accountId + "/AcceptTermsOfUse",
             new TypeReference<>() {
             },
             null,
