@@ -1,4 +1,4 @@
-package com.the_mgi.wildapricot_wrapper.events.base.service;
+package com.the_mgi.wildapricot_wrapper.events.base;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.the_mgi.wildapricot_wrapper.ApplicationService;

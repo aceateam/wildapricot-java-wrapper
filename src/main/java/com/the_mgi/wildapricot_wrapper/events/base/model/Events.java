@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.the_mgi.wildapricot_wrapper.contact.base.converters.DateConverter;
 import com.the_mgi.wildapricot_wrapper.events.base.model.enums.EventAccessLevel;
+import com.the_mgi.wildapricot_wrapper.events.base.model.enums.EventType;
 import lombok.Getter;
 
 import java.util.Date;
@@ -30,6 +31,12 @@ public class Events {
      */
     @JsonProperty("Name")
     private String name;
+
+    /**
+     * Indicates if event is simple (RSVP) or regular.
+     */
+    @JsonProperty("EventType")
+    private EventType eventType;
 
     /**
      * Date and time when the event is scheduled to start.
@@ -79,7 +86,7 @@ public class Events {
      * Event AccessLevel
      */
     @JsonProperty("AccessLevel")
-    private EventAccessLevel eventAccessLevel;
+    private EventAccessLevel accessLevel;
 
     /**
      * A collection of tags associated with the event.
