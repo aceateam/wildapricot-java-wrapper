@@ -1,5 +1,7 @@
 # Wildapricot Wrapper for Java and Kotlin
 
+### Caution: This is currently a work in progress, and it is not stable yet, please take care of that in your projects.
+
 Creating this wrapper as an open-source project, to help the community, who are looking for a well structured package for their daily needs of interactive with the wildapricot API.
 
 The motivation behind this project is to solve the current problem that i am having at our organization and another is to try and help the community if i can do so.
@@ -106,3 +108,5 @@ public class YourContactDetails {
             .getContactService()
             .getInformationAboutContactParsed(xxxx, xxxx, false, YourContactDetails.class);
 ```
+
+## Happy Coding 🎉🎉
