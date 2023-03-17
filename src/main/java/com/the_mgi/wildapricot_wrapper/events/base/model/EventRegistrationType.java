@@ -135,4 +135,16 @@ public class EventRegistrationType {
      */
     @JsonProperty("CancellationBehaviour")
     private EventRegistrationCancellationBehavior cancellationBehaviour;
+
+    /**
+     * In case if CancellationBehaviour = AllowUpToPeriodBeforeEvent, this field indicates the minimum number of days before the event that cancellations are allowed.
+     */
+    @JsonProperty("CancellationDaysBeforeEvent")
+    private Integer cancellationDaysBeforeEvent;
+
+    /**
+     * Indicated if registrant should be added to waitlist if registrations have reached their limit.
+     */
+    @JsonProperty("IsWaitlistEnabled")
+    private Boolean isWaitlistEnabled;
 }
