@@ -19,7 +19,7 @@ public class EventsResponse {
      * List of events that match request criteria.
      */
     @JsonProperty("Events")
-    private List<Events> events;
+    private List<Event> events;
 
     /**
      * Number of events that match request criteria. This field appears only if $count parameter was passed in request.
@@ -32,7 +32,7 @@ public class EventsResponse {
         return this;
     }
 
-    public EventsResponse setEvents(List<Events> events) {
+    public EventsResponse setEvents(List<Event> events) {
         this.events = events;
         return this;
     }

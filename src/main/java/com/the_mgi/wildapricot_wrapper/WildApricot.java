@@ -5,6 +5,7 @@ import com.the_mgi.wildapricot_wrapper.base.util.AuthenticationOption;
 import com.the_mgi.wildapricot_wrapper.contact.base.ContactService;
 import com.the_mgi.wildapricot_wrapper.contact.custom_fields.CustomFieldService;
 import com.the_mgi.wildapricot_wrapper.contact.saved_search.SavedSearchService;
+import com.the_mgi.wildapricot_wrapper.events.base.EventsService;
 import com.the_mgi.wildapricot_wrapper.membership.bundles.BundlesService;
 import com.the_mgi.wildapricot_wrapper.membership.groups.GroupService;
 import com.the_mgi.wildapricot_wrapper.membership.levels.LevelsService;
@@ -27,6 +28,7 @@ public class WildApricot {
     private LevelsService levelsService;
     private BundlesService bundlesService;
     private GroupService groupService;
+    private EventsService eventsService;
 
     private WildApricot(
         AuthenticationOption authOption,
@@ -54,6 +56,7 @@ public class WildApricot {
         levelsService = new LevelsService(this);
         bundlesService = new BundlesService(this);
         groupService = new GroupService(this);
+        eventsService = new EventsService(this);
     }
 
     @Override
