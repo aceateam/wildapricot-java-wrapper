@@ -101,4 +101,133 @@ public class EventDetails {
      */
     @JsonProperty("IsWaitlistEnabled")
     private Boolean isWaitlistEnabled;
+
+    @JsonProperty("WaitlistSettings")
+    private EventWaitlistSettings waitlistSettings;
+
+    /**
+     * Indicates if multiple registrations are allowed for the same contact.
+     */
+    @JsonProperty("MultipleRegistrationAllowed")
+    private Boolean multipleRegistrationAllowed;
+
+    /**
+     * Settings for section "List of event registrants" on UI.
+     */
+    @JsonProperty("AttendeesDisplaySettings")
+    private EventAttendeeDisplaySettings attendeesDisplaySettings;
+
+    public EventDetails setDescriptionHtml(String descriptionHtml) {
+        this.descriptionHtml = descriptionHtml;
+        return this;
+    }
+
+    public EventDetails setPaymentInstructions(String paymentInstructions) {
+        this.paymentInstructions = paymentInstructions;
+        return this;
+    }
+
+    public EventDetails setTimeZone(Timezone timeZone) {
+        this.timeZone = timeZone;
+        return this;
+    }
+
+    public EventDetails setRegistrationTypes(List<EventRegistrationType> registrationTypes) {
+        this.registrationTypes = registrationTypes;
+        return this;
+    }
+
+    public EventDetails setEventRegistrationFields(List<EventRegistrationFieldDescription> eventRegistrationFields) {
+        this.eventRegistrationFields = eventRegistrationFields;
+        return this;
+    }
+
+    public EventDetails setTotalPaid(Double totalPaid) {
+        this.totalPaid = totalPaid;
+        return this;
+    }
+
+    public EventDetails setTotalDue(Double totalDue) {
+        this.totalDue = totalDue;
+        return this;
+    }
+
+    public EventDetails setAccessControl(EventAccessControl accessControl) {
+        this.accessControl = accessControl;
+        return this;
+    }
+
+    public EventDetails setGuestRegistrationSettings(EventGuestRegistrationSettings guestRegistrationSettings) {
+        this.guestRegistrationSettings = guestRegistrationSettings;
+        return this;
+    }
+
+    public EventDetails setOrganizer(IdAndUrl organizer) {
+        this.organizer = organizer;
+        return this;
+    }
+
+    public EventDetails setPaymentMethod(EventPaymentMethodType paymentMethod) {
+        this.paymentMethod = paymentMethod;
+        return this;
+    }
+
+    public EventDetails setRegistrationConfirmationExtraInfo(String registrationConfirmationExtraInfo) {
+        this.registrationConfirmationExtraInfo = registrationConfirmationExtraInfo;
+        return this;
+    }
+
+    public EventDetails setRegistrationMessage(String registrationMessage) {
+        this.registrationMessage = registrationMessage;
+        return this;
+    }
+
+    public EventDetails setSendEmailCopy(Boolean sendEmailCopy) {
+        this.sendEmailCopy = sendEmailCopy;
+        return this;
+    }
+
+    public EventDetails setWaitlistEnabled(Boolean waitlistEnabled) {
+        isWaitlistEnabled = waitlistEnabled;
+        return this;
+    }
+
+    public EventDetails setWaitlistSettings(EventWaitlistSettings waitlistSettings) {
+        this.waitlistSettings = waitlistSettings;
+        return this;
+    }
+
+    public EventDetails setMultipleRegistrationAllowed(Boolean multipleRegistrationAllowed) {
+        this.multipleRegistrationAllowed = multipleRegistrationAllowed;
+        return this;
+    }
+
+    public EventDetails setAttendeesDisplaySettings(EventAttendeeDisplaySettings attendeesDisplaySettings) {
+        this.attendeesDisplaySettings = attendeesDisplaySettings;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "EventDetails{" +
+            "descriptionHtml='" + descriptionHtml + '\'' +
+            ", paymentInstructions='" + paymentInstructions + '\'' +
+            ", timeZone=" + timeZone +
+            ", registrationTypes=" + registrationTypes +
+            ", eventRegistrationFields=" + eventRegistrationFields +
+            ", totalPaid=" + totalPaid +
+            ", totalDue=" + totalDue +
+            ", accessControl=" + accessControl +
+            ", guestRegistrationSettings=" + guestRegistrationSettings +
+            ", organizer=" + organizer +
+            ", paymentMethod=" + paymentMethod +
+            ", registrationConfirmationExtraInfo='" + registrationConfirmationExtraInfo + '\'' +
+            ", registrationMessage='" + registrationMessage + '\'' +
+            ", sendEmailCopy=" + sendEmailCopy +
+            ", isWaitlistEnabled=" + isWaitlistEnabled +
+            ", waitlistSettings=" + waitlistSettings +
+            ", multipleRegistrationAllowed=" + multipleRegistrationAllowed +
+            ", attendeesDisplaySettings=" + attendeesDisplaySettings +
+            '}';
+    }
 }

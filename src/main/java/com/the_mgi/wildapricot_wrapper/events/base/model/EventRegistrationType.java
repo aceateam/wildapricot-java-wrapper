@@ -147,4 +147,109 @@ public class EventRegistrationType {
      */
     @JsonProperty("IsWaitlistEnabled")
     private Boolean isWaitlistEnabled;
+
+    public EventRegistrationType setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    public EventRegistrationType setUrl(String url) {
+        this.url = url;
+        return this;
+    }
+
+    public EventRegistrationType setEnabled(Boolean enabled) {
+        isEnabled = enabled;
+        return this;
+    }
+
+    public EventRegistrationType setEventId(Integer eventId) {
+        this.eventId = eventId;
+        return this;
+    }
+
+    public EventRegistrationType setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public EventRegistrationType setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public EventRegistrationType setBasePrice(Double basePrice) {
+        this.basePrice = basePrice;
+        return this;
+    }
+
+    public EventRegistrationType setGuestPrice(Double guestPrice) {
+        this.guestPrice = guestPrice;
+        return this;
+    }
+
+    public EventRegistrationType setUseTaxScopeSettings(Boolean useTaxScopeSettings) {
+        this.useTaxScopeSettings = useTaxScopeSettings;
+        return this;
+    }
+
+    public EventRegistrationType setAvailability(EventRegistrationTypeAvailability availability) {
+        this.availability = availability;
+        return this;
+    }
+
+    public EventRegistrationType setRegistrationCode(String registrationCode) {
+        this.registrationCode = registrationCode;
+        return this;
+    }
+
+    public EventRegistrationType setAvailableForMembershipLevels(List<LinkedResource> availableForMembershipLevels) {
+        this.availableForMembershipLevels = availableForMembershipLevels;
+        return this;
+    }
+
+    public EventRegistrationType setAvailableFrom(Date availableFrom) {
+        this.availableFrom = availableFrom;
+        return this;
+    }
+
+    public EventRegistrationType setAvailableThrough(Date availableThrough) {
+        this.availableThrough = availableThrough;
+        return this;
+    }
+
+    public EventRegistrationType setMaximumRegistrantsCount(Integer maximumRegistrantsCount) {
+        this.maximumRegistrantsCount = maximumRegistrantsCount;
+        return this;
+    }
+
+    public EventRegistrationType setCurrentRegistrantsCount(Integer currentRegistrantsCount) {
+        this.currentRegistrantsCount = currentRegistrantsCount;
+        return this;
+    }
+
+    public EventRegistrationType setGuestRegistrationPolicy(EventRegistrationPolicy guestRegistrationPolicy) {
+        this.guestRegistrationPolicy = guestRegistrationPolicy;
+        return this;
+    }
+
+    public EventRegistrationType setUnavailabilityPolicy(EventRegistrationUnavailabilityPolicy unavailabilityPolicy) {
+        this.unavailabilityPolicy = unavailabilityPolicy;
+        return this;
+    }
+
+    public EventRegistrationType setCancellationBehaviour(EventRegistrationCancellationBehavior cancellationBehaviour) {
+        this.cancellationBehaviour = cancellationBehaviour;
+        return this;
+    }
+
+    public EventRegistrationType setCancellationDaysBeforeEvent(Integer cancellationDaysBeforeEvent) {
+        this.cancellationDaysBeforeEvent = cancellationDaysBeforeEvent;
+        return this;
+    }
+
+    public EventRegistrationType setWaitlistEnabled(Boolean waitlistEnabled) {
+        isWaitlistEnabled = waitlistEnabled;
+        return this;
+    }
 }
