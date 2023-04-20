@@ -3,6 +3,7 @@ package com.the_mgi.wildapricot_wrapper.events.base;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.the_mgi.wildapricot_wrapper.ApplicationService;
 import com.the_mgi.wildapricot_wrapper.WildApricot;
+import com.the_mgi.wildapricot_wrapper.base.model.Pair;
 import com.the_mgi.wildapricot_wrapper.events.base.model.EventsResponse;
 import com.the_mgi.wildapricot_wrapper.exception.HttpException;
 
@@ -72,7 +73,16 @@ public class EventsService {
             "accounts/" + accountId + "/events",
             new TypeReference<>() {
             },
-            List.of()
+            List.of(
+                Pair.of("$async", String.valueOf($async)),
+                Pair.of("resultId", resultId),
+                Pair.of("$filter", $filter),
+                Pair.of("$sort", $sort),
+                Pair.of("$skip", String.valueOf($skip)),
+                Pair.of("$top", String.valueOf($top)),
+                Pair.of("$count", String.valueOf($count)),
+                Pair.of("idsOnly", String.valueOf(idsOnly))
+            )
         );
     }
 }

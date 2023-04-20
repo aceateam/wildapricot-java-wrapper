@@ -24,7 +24,7 @@ public class EventsResponse {
     /**
      * Number of events that match request criteria. This field appears only if $count parameter was passed in request.
      */
-    @JsonProperty("EventsIdentifiers")
+    @JsonProperty("Count")
     private Integer count;
 
     public EventsResponse setEventIdentifiers(List<Integer> eventIdentifiers) {
